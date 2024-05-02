@@ -347,5 +347,5 @@ def batalha_naval():
             print("Resposta inválida, por favor responda com 's' para sim ou 'n' para não.")
             jogar_novamente = input("Deseja jogar novamente? (s/n): ").lower()
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     batalha_naval()
