@@ -276,3 +276,12 @@ def ataque_comp(mapa_jogador, mapa_computador, nome_pais_jogador, nome_pais_comp
 
 def escolhe_pais_comp():
     return random.choice(list(PAISES.keys()))
+
+def imprime_paises():
+    print("Escolha seu país:")
+    print("=" * 40)  
+    for i, (pais, navios) in enumerate(PAISES.items(), 1):
+        print(f"{i}: {pais} - Frota:")
+        for tipo_navio, quantidade in navios.items():
+            print(f"   {quantidade}x {tipo_navio.capitalize()}")
+        print("-" * 40)  
