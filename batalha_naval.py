@@ -285,3 +285,63 @@ def imprime_paises():
         for tipo_navio, quantidade in navios.items():
             print(f"   {quantidade}x {tipo_navio.capitalize()}")
         print("-" * 40)  
+
+
+def batalha_naval():
+    jogar_novamente = 's'
+    while jogar_novamente == 's':
+        print("\033[1;30;m======================================\033[m")
+        print("\033[1;30;m|                                    |\033[m")
+        print("\033[1;30;m|                                    |\033[m")
+        print("\033[1;30;m|   \033[1;35m Bem-vindo ao Batalha Naval  \033[1;30;m |\033[m")
+        print("\033[1;30;m|                                    |\033[m")
+        print("\033[1;30;m|                                    |\033[m")
+        print("\033[1;30;m======================================\033[m")
+        print(" ")
+        nome_pais_computador = escolhe_pais_comp()
+        print(f"Computador está alocando os navios de guerra do país {nome_pais_computador}...")
+        print("             Computador está pronto para jogar!")
+        print(" ")
+        mapa_jogador = cria_mapa(10)
+        mapa_computador = cria_mapa(10)
+        imprime_paises()
+        escolha_valida = False
+        while not escolha_valida:
+            try:
+                escolha = int(input("Qual o número da nação da sua frota? "))
+                if 1 <= escolha <= len(PAISES):
+                    nome_pais_jogador = list(PAISES.keys())[escolha - 1]
+                    escolha_valida = True
+                else:
+                    print("Escolha inválida, tente novamente.")
+            except ValueError:
+                print("Por favor, insira um número válido.")
+        aloca_navios_jogador(mapa_jogador, mapa_computador, nome_pais_jogador, nome_pais_computador)
+        aloca_navios(mapa_computador, [CONFIGURACAO[tipo] for tipo in PAISES[nome_pais_computador].keys()])
+        computador_venceu = False
+        vez_jogador = random.choice([True, False])
+        print("Preparando para iniciar o jogo:")
+        for i in range(5, 0, -1):
+            print(i)
+        print("Iniciando o jogo...")
+        while not jogador_venceu and not computador_venceu:
+            if vez_jogador:
+                print("\nSua vez de atacar!")
+                ataque_jogador(mapa_jogador, mapa_computador, nome_pais_jogador, nome_pais_computador)
+                if foi_derrotado(mapa_computador):
+                    jogador_venceu = True
+            else:
+                print("\nVez do computador atacar!")
+                ataque_comp(mapa_jogador, mapa_computador, nome_pais_jogador, nome_pais_computador)
+                if foi_derrotado(mapa_jogador):
+                    computador_venceu = True
+            vez_jogador = not vez_jogador
+        print("\nJogo encerrado!")
+        if jogador_venceu:
+            print(f"Parabéns! Você venceu representando o país {nome_pais_jogador}!")
+        else:
+            print("Você perdeu! O computador venceu.")
+        jogar_novamente = input("Deseja jogar novamente? (s/n): ").lower()
+        while jogar_novamente not in ['s', 'n']:
+            print("Resposta inválida, por favor responda com 's' para sim ou 'n' para não.")
+            jogar_novamente = input("Deseja jogar novamente? (s/n): ").lower()
