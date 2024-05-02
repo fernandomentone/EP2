@@ -164,3 +164,42 @@ def imprime_mapa(mapa_jogador, mapa_computador, nome_pais_jogador, nome_pais_com
     print("   " + "  ".join([ALFABETO[i] for i in range(N)]), end="    ")
     print("       ", end="")
     print("   " + "  ".join([ALFABETO[i] for i in range(N)]))
+
+    
+    def aloca_navios_jogador(mapa_jogador, mapa_computador, nome_pais_jogador, nome_pais_computador):
+        print(f"Você escolheu a nação {nome_pais_jogador}")
+        print("Agora é a sua vez de alocar seus navios de guerra!")
+        imprime_mapa(mapa_jogador, mapa_computador, nome_pais_jogador, nome_pais_computador)
+        tipo_navio_index = 0
+        tipos_navios = list(PAISES[nome_pais_jogador].items())  # Transforma o dicionário em uma lista de tuplas para iteração
+        while tipo_navio_index < len(tipos_navios):
+            tipo_navio, quantidade = tipos_navios[tipo_navio_index]
+            print(f"\nAloque os navios do tipo {tipo_navio}:")
+            tipo_navio_bloco = CONFIGURACAO[tipo_navio]
+            i = 0
+            while i < quantidade:
+                sucesso = False
+                while not sucesso:
+                    print(f"\nAlocação do {i+1}º {tipo_navio}\n")
+                    imprime_mapa(mapa_jogador, mapa_computador, nome_pais_jogador, nome_pais_computador)
+                    linha = input("\nDigite o número da linha (1 a 10): ")
+                    linha = int(linha) - 1
+                    coluna = input("Digite a letra da coluna (A a J): ").upper()
+                    if coluna not in ALFABETO:
+                        print("Coluna inválida, tente novamente.")
+                        continue
+                    coluna = ALFABETO.index(coluna)
+                    orientacao = input("Digite a orientação do navio (v para vertical, h para horizontal): ").lower()
+                    if posicao_suporta(mapa_jogador, tipo_navio_bloco, linha, coluna, orientacao):
+                        if orientacao == 'v':
+                            j = linha
+                            while j < linha + tipo_navio_bloco:
+                                mapa_jogador[j][coluna] = 'N'
+                                j += 1
+                        else:
+                            j = coluna
+                            while j < coluna + tipo_navio_bloco:
+                                mapa_jogador[linha][j] = 'N'
+                                j += 1
+                        sucesso = True
+                
