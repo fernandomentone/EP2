@@ -183,6 +183,9 @@ def imprime_mapa(mapa_jogador, mapa_computador, nome_pais_jogador, nome_pais_com
                     print(f"\nAlocação do {i+1}º {tipo_navio}\n")
                     imprime_mapa(mapa_jogador, mapa_computador, nome_pais_jogador, nome_pais_computador)
                     linha = input("\nDigite o número da linha (1 a 10): ")
+                    if not linha.isdigit() or int(linha) < 1 or int(linha) > 10:
+                        print("Linha inválida, tente novamente.")
+                        continue
                     linha = int(linha) - 1
                     coluna = input("Digite a letra da coluna (A a J): ").upper()
                     if coluna not in ALFABETO:
@@ -202,4 +205,9 @@ def imprime_mapa(mapa_jogador, mapa_computador, nome_pais_jogador, nome_pais_com
                                 mapa_jogador[linha][j] = 'N'
                                 j += 1
                         sucesso = True
+                    else:
+                        print("Posição inválida, tente novamente.")
+                i += 1
+            tipo_navio_index += 1
+            print()
                 
