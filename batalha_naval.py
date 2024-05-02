@@ -240,7 +240,7 @@ def ataque_jogador(mapa_jogador, mapa_computador, nome_pais_jogador, nome_pais_c
             else:
                 print("Coluna inválida, tente novamente.")
 
-        if mapa_jogador[linha][coluna] == ' ':  
+        if mapa_computador[linha][coluna] == ' ':  
             print("Água!")
             mapa_computador[linha][coluna] = 'O'
             sucesso = True
