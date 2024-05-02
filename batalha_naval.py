@@ -137,6 +137,7 @@ def foi_derrotado(mapa):
                 return False
     return True
 
+
 def imprime_mapa(mapa_jogador, mapa_computador, nome_pais_jogador, nome_pais_computador):
     N = len(mapa_jogador)
     print(f"    JOGADOR - {nome_pais_jogador:20}{'           COMPUTADOR - ' + nome_pais_computador:20}")
@@ -211,3 +212,41 @@ def imprime_mapa(mapa_jogador, mapa_computador, nome_pais_jogador, nome_pais_com
             tipo_navio_index += 1
             print()
                 
+
+def ataque_jogador(mapa_jogador, mapa_computador, nome_pais_jogador, nome_pais_computador):
+    sucesso = False
+    while not sucesso:
+        imprime_mapa(mapa_jogador, mapa_computador, nome_pais_jogador, nome_pais_computador)
+        print("\nAtaque:")
+
+        linha_valida = False
+        while not linha_valida:
+            linha = input("Digite o número da linha (1 a 10): ")
+            if linha.isdigit() and 1 <= int(linha) <= 10:
+                linha = int(linha) - 1
+                linha_valida = True
+            else:
+                print("Linha inválida, tente novamente.")
+
+        coluna_valida = False
+        while not coluna_valida:
+            coluna = input("Digite a letra da coluna (A a J): ").upper()
+            if coluna in ALFABETO:
+                coluna = ALFABETO.index(coluna)
+                if 0 <= coluna < 10:
+                    coluna_valida = True
+                else:
+                    print("Coluna fora do alcance, tente novamente.")
+            else:
+                print("Coluna inválida, tente novamente.")
+
+        if mapa_jogador[linha][coluna] == ' ':  
+            print("Água!")
+            mapa_computador[linha][coluna] = 'O'
+            sucesso = True
+        elif mapa_jogador[linha][coluna] == 'N':
+            print("Acertou um navio!")
+            mapa_computador[linha][coluna] = 'X'
+            sucesso = True
+        else:
+            print("Já atacou essa posição, tente novamente.")
