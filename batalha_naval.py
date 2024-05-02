@@ -139,33 +139,28 @@ def foi_derrotado(mapa):
 
 def imprime_mapa(mapa_jogador, mapa_computador, nome_pais_jogador, nome_pais_computador):
     N = len(mapa_jogador)
-    header = f"    JOGADOR - {nome_pais_jogador:20}{'COMPUTADOR - ' + nome_pais_computador:20}"
-    indices = "   " + "  ".join(ALFABETO[i] for i in range(N))
-
-    # Imprime cabeçalho com nomes dos jogadores
-    print(header)
-    print(indices, end="       ")
-    print(indices)
-
-    # Imprime os mapas lado a lado
+    print(f"    JOGADOR - {nome_pais_jogador:20}{'           COMPUTADOR - ' + nome_pais_computador:20}")
+    print("   " + "  ".join([ALFABETO[i] for i in range(N)]), end="    ")
+    print("       ", end="")
+    print("   " + "  ".join([ALFABETO[i] for i in range(N)]))
     for i in range(N):
         print(f"{i+1:2} ", end="")
         for j in range(N):
-            char = mapa_jogador[i][j]
-            if char == ' ':
-                print(CORES['cyan'] + char + CORES['reset'], end="  ")
-            elif char == 'X':
-                print(CORES['red'] + char + CORES['reset'], end="  ")
+            if mapa_jogador[i][j] == ' ':
+                print(CORES['cyan'] + mapa_jogador[i][j] + CORES['reset'], end="  ")
+            elif mapa_jogador[i][j] == 'X':
+                print(CORES['blue'] + mapa_jogador[i][j] + CORES['reset'], end="  ")
             else:
-                print(CORES['yellow'] + char + CORES['reset'], end="  ")
-        print(f" {i+1}", end="      ")
-
+                print(CORES['yellow'] + mapa_jogador[i][j] + CORES['reset'], end="  ")
+        print(f" {i+1}", end="")
+        print("      ", end="")
         print(f"{i+1:2} ", end="")
         for j in range(N):
-            char = mapa_computador[i][j]
-            print(CORES['cyan'] + (' ' if char in (' ', 'N') else char) + CORES['reset'], end="  ")
+            if mapa_computador[i][j] == ' ' or mapa_computador[i][j] == 'N':
+                print(CORES['cyan'] + ' ' + CORES['reset'], end="  ")
+            else:
+                print(CORES['cyan'] + mapa_computador[i][j] + CORES['reset'], end="  ")
         print(f" {i+1}")
-
-    # Imprime rodapé com índices novamente
-    print(indices, end="       ")
-    print(indices)
+    print("   " + "  ".join([ALFABETO[i] for i in range(N)]), end="    ")
+    print("       ", end="")
+    print("   " + "  ".join([ALFABETO[i] for i in range(N)]))
