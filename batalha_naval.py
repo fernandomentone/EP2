@@ -272,3 +272,7 @@ def ataque_comp(mapa_jogador, mapa_computador, nome_pais_jogador, nome_pais_comp
             sucesso = True
         else:
             print("O computador tentará novamente.")
+
+
+def escolhe_pais_comp():
+    return random.choice(list(PAISES.keys()))
