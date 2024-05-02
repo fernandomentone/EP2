@@ -318,6 +318,7 @@ def batalha_naval():
                 print("Por favor, insira um número válido.")
         aloca_navios_jogador(mapa_jogador, mapa_computador, nome_pais_jogador, nome_pais_computador)
         aloca_navios(mapa_computador, [CONFIGURACAO[tipo] for tipo in PAISES[nome_pais_computador].keys()])
+        jogador_venceu = False
         computador_venceu = False
         vez_jogador = random.choice([True, False])
         print("Preparando para iniciar o jogo:")
@@ -345,3 +346,6 @@ def batalha_naval():
         while jogar_novamente not in ['s', 'n']:
             print("Resposta inválida, por favor responda com 's' para sim ou 'n' para não.")
             jogar_novamente = input("Deseja jogar novamente? (s/n): ").lower()
+
+if _name_ == "_main_":
+    batalha_naval()
