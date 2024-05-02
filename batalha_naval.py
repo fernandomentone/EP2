@@ -1,4 +1,4 @@
-print('fofo')
+
 #BATALHA NAVAL
 
 ##############################################################################################################################################
@@ -251,3 +251,24 @@ def ataque_jogador(mapa_jogador, mapa_computador, nome_pais_jogador, nome_pais_c
             sucesso = True
         else:
             print("Já atacou essa posição, tente novamente.")
+
+
+def ataque_comp(mapa_jogador, mapa_computador, nome_pais_jogador, nome_pais_computador):
+    sucesso = False
+    while not sucesso:
+        linha = random.randint(0, len(mapa_jogador) - 1)
+        coluna = random.randint(0, len(mapa_jogador) - 1)
+        posicao = mapa_jogador[linha][coluna]
+        
+        print(f"O computador atacou: {ALFABETO[coluna]}{linha + 1}")
+        
+        if posicao == ' ':
+            print("Água!")
+            mapa_jogador[linha][coluna] = 'O'
+            sucesso = True
+        elif posicao == 'N':
+            print("Acertou um navio!")
+            mapa_jogador[linha][coluna] = 'X'
+            sucesso = True
+        else:
+            print("O computador tentará novamente.")
