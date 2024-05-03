@@ -243,14 +243,17 @@ def ataque_jogador(mapa_jogador, mapa_computador, nome_pais_jogador, nome_pais_c
 
         if mapa_computador[linha][coluna] == ' ':  
             print("Água!")
+            time.sleep(0.5)
             mapa_computador[linha][coluna] = 'O'
             sucesso = True
         elif mapa_jogador[linha][coluna] == 'N':
             print("Acertou um navio!")
+            time.sleep(0.5)
             mapa_computador[linha][coluna] = 'X'
             sucesso = True
         else:
             print("Já atacou essa posição, tente novamente.")
+            time.sleep(0.5)
 
 
 def ataque_comp(mapa_jogador, mapa_computador, nome_pais_jogador, nome_pais_computador):
@@ -264,14 +267,18 @@ def ataque_comp(mapa_jogador, mapa_computador, nome_pais_jogador, nome_pais_comp
         
         if posicao == ' ':
             print("Água!")
+            time.sleep(0.5)
             mapa_jogador[linha][coluna] = 'O'
             sucesso = True
         elif posicao == 'N':
+
             print("Acertou um navio!")
+            time.sleep(0.5)
             mapa_jogador[linha][coluna] = 'X'
             sucesso = True
         else:
             print("O computador tentará novamente.")
+            time.sleep(0.5)
 
 
 def escolhe_pais_comp():
@@ -286,29 +293,33 @@ def imprime_paises():
             print(f"   {quantidade}x {tipo_navio.capitalize()}")
         print("-" * 40)  
 
-
+import time
 def batalha_naval():
     jogar_novamente = 's'
     while jogar_novamente == 's':
         print("\033[1;30;m======================================\033[m")
         print("\033[1;30;m|                                    |\033[m")
         print("\033[1;30;m|                                    |\033[m")
-        print("\033[1;30;m|   \033[1;35m Bem-vindo ao Batalha Naval  \033[1;30;m |\033[m")
+        print("\033[1;30;m|   \033[1;35m Bem-vindo ao Batalha Naval     \033[1;30;m |\033[m")
         print("\033[1;30;m|                                    |\033[m")
         print("\033[1;30;m|                                    |\033[m")
         print("\033[1;30;m======================================\033[m")
         print(" ")
+        time.sleep(1)
         nome_pais_computador = escolhe_pais_comp()
         print(f"Computador está alocando os navios de guerra do país {nome_pais_computador}...")
         print("             Computador está pronto para jogar!")
         print(" ")
+        time.sleep(2)
         mapa_jogador = cria_mapa(10)
         mapa_computador = cria_mapa(10)
         imprime_paises()
+        time.sleep(0.5)
         escolha_valida = False
         while not escolha_valida:
             try:
                 escolha = int(input("Qual o número da nação da sua frota? "))
+                time.sleep(0.5)
                 if 1 <= escolha <= len(PAISES):
                     nome_pais_jogador = list(PAISES.keys())[escolha - 1]
                     escolha_valida = True
@@ -324,10 +335,13 @@ def batalha_naval():
         print("Preparando para iniciar o jogo:")
         for i in range(5, 0, -1):
             print(i)
+            time.sleep(1)
         print("Iniciando o jogo...")
+        time.sleep(1)
         while not jogador_venceu and not computador_venceu:
             if vez_jogador:
                 print("\nSua vez de atacar!")
+                time.sleep(1)
                 ataque_jogador(mapa_jogador, mapa_computador, nome_pais_jogador, nome_pais_computador)
                 if foi_derrotado(mapa_computador):
                     jogador_venceu = True
@@ -337,9 +351,11 @@ def batalha_naval():
                 if foi_derrotado(mapa_jogador):
                     computador_venceu = True
             vez_jogador = not vez_jogador
+        time.sleep(1)
         print("\nJogo encerrado!")
         if jogador_venceu:
             print(f"Parabéns! Você venceu representando o país {nome_pais_jogador}!")
+            time.sleep(1)
         else:
             print("Você perdeu! O computador venceu.")
         jogar_novamente = input("Deseja jogar novamente? (s/n): ").lower()
